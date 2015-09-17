@@ -1,2 +1,3 @@
 # ruby-koans
-Just Ruby Koans.
+Just my Ruby Koans.
+run with `ruby path_to_enlightment`
