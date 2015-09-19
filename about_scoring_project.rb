@@ -30,7 +30,27 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # Your goal is to write the score method.
 
 def score(dice)
-  # You need to write this method
+  grouped_hash = dice.group_by { |i| i }.map do |k,v|
+    if v.count > 3
+      if k == 1
+        1000 + 100*(v[3..-1].size)
+      elsif k == 5
+        500 + 50*(v[3..-1].size)
+      else
+        k*100
+      end
+    elsif v.count == 3 && k == 1
+      1000
+    elsif v.count == 3
+      k*100
+    elsif k == 5
+      50*v.count
+    elsif k == 1
+      100*v.count
+    else
+      0
+    end
+  end.inject(0) { |product, item| product + item }
 end
 
 class AboutScoringProject < Neo::Koan
